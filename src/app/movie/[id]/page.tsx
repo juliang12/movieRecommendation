@@ -5,6 +5,7 @@ import Loader from "@/components/loader/Loader";
 import useGetMovieDetail from "@/hooks/useGetMovieDetail";
 import useCurrentUser from "@/hooks/auth/useCurrentUser";
 import AuthGuard from "@/components/auth/form/protect/AuthGuard";
+import { ToastContainer } from "react-toastify";
 
 const MoviePage = () => {
   const { movieDetails, loading } = useGetMovieDetail();
@@ -20,6 +21,7 @@ const MoviePage = () => {
       ) : (
         <CardDetails user={currentUser} movie={movieDetails} />
       )}
+      <ToastContainer/>
     </AuthGuard>
     </>
   );

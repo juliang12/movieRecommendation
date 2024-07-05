@@ -20,7 +20,6 @@ const BookmarksPage = () => {
           ))}
         </div>
       </div>
-      <ToastContainer/>
     </AuthGuard>
   );
 };

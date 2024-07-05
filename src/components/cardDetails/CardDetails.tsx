@@ -22,7 +22,7 @@ const CardDetails = ({ user, movie }: Movies) => {
   const handleAddBookmark = async () => {
     try {
       await addBookmarks(user, movie);
-      toast.success("added to bookmarks");
+      toast.success("Bookmark updated!");
     } catch (error) {
       toast.error("Error adding to bookmarks");
     }
