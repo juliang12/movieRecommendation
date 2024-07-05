@@ -15,7 +15,7 @@ const AuthRegisterForm = () => {
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "", username: '' } });
 
-  const handleRegister = async (formData: AuthForm) => {
+  const handleRegister = async (formData: { email: string; password: string; username: string }) => {
     try {
       await registerAuth(formData.email, formData.password, formData.username)
       toast.success('Account created successfully')

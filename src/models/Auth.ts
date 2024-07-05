@@ -1,5 +1,10 @@
 import { MovieDetails } from "./Movie";
 
+export interface AuthFormLoginSchema {
+  email: string;
+  password: string;
+}
+
 export interface AuthForm {
   email: string;
   password: string;

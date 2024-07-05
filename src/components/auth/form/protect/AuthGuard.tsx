@@ -1,12 +1,12 @@
 "use client"
-import { redirect, usePathname } from 'next/navigation'
-import React from 'react'
+import useAuth from '@/hooks/auth/useAuth'
+import { redirect } from 'next/navigation'
 
 interface Props {
     children: React.ReactNode
 }
 const AuthGuard = ({children}: Props) => {
-    const user = localStorage.getItem('user')
+  const { user } = useAuth()
 
   return (
     <>{!user ? redirect('/auth/login') : children}</>

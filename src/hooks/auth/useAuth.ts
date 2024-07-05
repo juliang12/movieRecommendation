@@ -1,9 +1,12 @@
+
 import { auth } from "@/config/firebase";
+import { getFromStorage } from "@/utils/getUserStorage";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 const useAuth = () => {
-  const [user, setuser] = useState<User | null>(null);
+  const userLogged = getFromStorage("user");
+  const [user, setuser] = useState<User | null>(userLogged ? JSON.parse(userLogged) : null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {

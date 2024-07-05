@@ -1,5 +1,5 @@
 "use client";
-import { AuthForm } from "@/models/Auth";
+import { AuthFormLoginSchema } from "@/models/Auth";
 import { AuthApi } from "@/services/AuthApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ const AuthFormLogin = () => {
     formState: { errors },
   } = useForm({ defaultValues: { email: "", password: "" } });
 
-  const handleLogin = async (formData: AuthForm) => {
+  const handleLogin = async (formData: AuthFormLoginSchema) => {
     try {
       await loginAuth(formData.email, formData.password);
 
