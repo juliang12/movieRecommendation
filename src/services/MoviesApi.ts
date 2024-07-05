@@ -61,11 +61,7 @@ export const MoviesApi = () => ({
         bookmarks: exist ? arrayRemove(movie) : arrayUnion(movie),
       });
     } catch (error) {
-      if (isAxiosError(error) && error.response) {
-        throw new Error(error.message);
-      } else {
         throw new Error("Failed to update bookmarks");
-      }
     }
   },
   getNewMovies: async () => {

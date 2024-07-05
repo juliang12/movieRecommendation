@@ -3,6 +3,7 @@ import AuthGuard from "@/components/auth/form/protect/AuthGuard";
 import Card from "@/components/card/Card";
 import useCurrentUser from "@/hooks/auth/useCurrentUser";
 import { MovieDetails } from "@/models/Movie";
+import { ToastContainer } from "react-toastify";
 
 const BookmarksPage = () => {
   const { currentUser } = useCurrentUser();
@@ -19,6 +20,7 @@ const BookmarksPage = () => {
           ))}
         </div>
       </div>
+      <ToastContainer/>
     </AuthGuard>
   );
 };
