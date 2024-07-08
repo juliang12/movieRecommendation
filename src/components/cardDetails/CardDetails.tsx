@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -6,28 +7,29 @@ import { MovieDetails } from "@/models/Movie";
 import ListSimilarCard from "../ListSimilarCard/ListSimilarCard";
 import { MoviesApi } from "@/services/MoviesApi";
 import { toast } from "react-toastify";
-import { AuthForm } from "@/models/Auth";
 import { findMyBookmarks } from "@/utils/findMyBookmarks";
+import useCurrentUser from "@/hooks/auth/useCurrentUser";
 
 interface Movies {
   movie: MovieDetails;
-  user: AuthForm;
 }
 const { addBookmarks } = MoviesApi();
 
-const CardDetails = ({ user, movie }: Movies) => {
+const CardDetails = ({ movie }: Movies) => {
+  const {currentUser} = useCurrentUser()
+
   const router = useRouter();
   if (!movie) return null;
 
   const handleAddBookmark = async () => {
     try {
-      await addBookmarks(user, movie);
+      await addBookmarks(currentUser, movie);
       toast.success("Bookmark updated!");
     } catch (error) {
       toast.error("Error adding to bookmarks");
     }
   };
-  const findBookrmarks = findMyBookmarks(user, movie.id);
+  const findBookrmarks = findMyBookmarks(currentUser, movie.id);
 
   return (
     <>
@@ -68,7 +70,7 @@ const CardDetails = ({ user, movie }: Movies) => {
           </p>
         </div>
       </div>
-      <ListSimilarCard />
+      <ListSimilarCard/>
     </>
   );
 };

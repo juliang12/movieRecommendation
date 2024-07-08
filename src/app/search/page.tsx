@@ -1,17 +1,28 @@
 import AuthGuard from "@/components/auth/form/protect/AuthGuard";
 import Grid from "@/components/grid/Grid";
+import Loader from "@/components/loader/Loader";
 import Search from "@/components/search/Search";
-import React from "react";
+import { MoviesApi } from "@/services/MoviesApi";
+import React, { Suspense } from "react";
 
-const SearchPage = () => {
+const { getMovies } = MoviesApi();
+const SearchPage = async ({
+  searchParams,
+}: {
+  searchParams: { query: string };
+}) => {
+  const searchMovies = await getMovies(searchParams.query);
+
   return (
     <>
-    <AuthGuard>
+      <AuthGuard>
         <Search />
-        <div className="h-full">
-          <Grid />
-        </div>
-    </AuthGuard>
+        <Suspense fallback={<Loader />}>
+          <div className="h-full">
+            <Grid movies={searchMovies} />
+          </div>
+        </Suspense>
+      </AuthGuard>
     </>
   );
 };

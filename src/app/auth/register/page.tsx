@@ -1,3 +1,4 @@
+"use server"
 import AuthRegisterForm from '@/components/auth/form/AuthRegisterForm'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
