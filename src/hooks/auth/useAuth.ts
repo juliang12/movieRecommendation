@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 const useAuth = () => {
   const userLogged = getFromStorage("user");
-  const [loading, setLoading] = useState(true)
   const [user, setuser] = useState<User | null>(userLogged ? JSON.parse(userLogged) : null);
 
   useEffect(() => {
@@ -19,14 +18,13 @@ const useAuth = () => {
         localStorage.removeItem("user");
       }
     });
-    setLoading(false)
 
+    // Limpieza del efecto
     return () => unsubscribe();
   }, []);
 
   return {
     user,
-    loading
   }
 
 };
