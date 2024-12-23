@@ -6,8 +6,9 @@ interface Props {
     children: React.ReactNode
 }
 const AuthGuard = ({children}: Props) => {
-  const { user } = useAuth()
-
+  const { user, loading } = useAuth()
+  if(loading) return "loading"
+  
   return (
     <>{!user ? redirect('/auth/login') : children}</>
   )
