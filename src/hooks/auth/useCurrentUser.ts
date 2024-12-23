@@ -23,6 +23,7 @@ const useCurrentUser = () => {
             id: doc.id,
           }))[0],
         });
+        // const refDoc = query(ref, where("userId", "==", user?.uid));
       });
     }
   }, [dispatch, user?.uid]);

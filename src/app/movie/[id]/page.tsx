@@ -1,19 +1,28 @@
-"use server";
+"use client";
 import "animate.css";
 import CardDetails from "@/components/cardDetails/CardDetails";
+import Loader from "@/components/loader/Loader";
+import useGetMovieDetail from "@/hooks/useGetMovieDetail";
+import useCurrentUser from "@/hooks/auth/useCurrentUser";
 import AuthGuard from "@/components/auth/form/protect/AuthGuard";
 import { ToastContainer } from "react-toastify";
-import { MoviesApi } from "@/services/MoviesApi";
-const { getDetailMovie } = MoviesApi();
-const MoviePage = async ({ params: { id } }: { params: { id: string } }) => {
-  const movieDetails = (await getDetailMovie(id)) as any;
+
+const MoviePage = () => {
+  const { movieDetails, loading } = useGetMovieDetail();
+  const {currentUser} = useCurrentUser()
 
   return (
     <>
-      <AuthGuard>
-        <CardDetails movie={movieDetails} />
-        <ToastContainer />
-      </AuthGuard>
+    <AuthGuard>
+      {!movieDetails && loading ? (
+        <div className="flex justify-center items-center h-screen">
+          <Loader />
+        </div>
+      ) : (
+        <CardDetails user={currentUser} movie={movieDetails} />
+      )}
+      <ToastContainer/>
+    </AuthGuard>
     </>
   );
 };
