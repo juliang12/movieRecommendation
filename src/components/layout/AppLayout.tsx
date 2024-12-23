@@ -16,7 +16,6 @@ const AppLayout = ({ children }: LayoutProps) => {
         {children}
       </main>
       <h1>una prueba mas</h1>
-      <h2>Purbea 3</h2>
       <Footer />
     </>
   );
