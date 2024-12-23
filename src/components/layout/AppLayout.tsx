@@ -15,6 +15,7 @@ const AppLayout = ({ children }: LayoutProps) => {
       <main className="h-full py-10 bg-black-100 overflow-hidden mx-auto sm:px-10 px-5">
         {children}
       </main>
+      <h1>una prueba mas</h1>
       <Footer />
     </>
   );
