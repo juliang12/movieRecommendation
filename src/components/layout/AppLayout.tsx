@@ -8,13 +8,14 @@ interface LayoutProps {
 }
 
 const AppLayout = ({ children }: LayoutProps) => {
-
+  console.log("AppLayout");
   return (
     <>
       <Navbar />
       <main className="h-full py-10 bg-black-100 overflow-hidden mx-auto sm:px-10 px-5">
         {children}
       </main>
+      <h1>una prueba mas</h1>
       <Footer />
     </>
   );

@@ -19,9 +19,8 @@ const ref = collection(db, "users");
 
 export const MoviesApi = () => ({
   getMovies: async (value = "") => {
-    const values = value.split(" ").join("+");
     try {
-      const { data } = await api(`/search/movie?query=${values}`);
+      const { data } = await api(`/search/movie?query=${value}`);
 
       return moviesDetailAdapter(data.results);
     } catch (error) {
