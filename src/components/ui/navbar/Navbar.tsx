@@ -9,7 +9,7 @@ import useAuth from "@/hooks/auth/useAuth";
 
 const Navbar = () => {
   const [hidde, setHidde] = useState(false);
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const handleMobile = () => {
     setHidde(!hidde);
@@ -22,6 +22,7 @@ const Navbar = () => {
   const signOutUser = async () => {
     await signOut(auth);
   };
+
 
   return (
     <div className="w-full h-12 bg-slate-900 flex justify-between px-5 items-center">
@@ -55,20 +56,20 @@ const Navbar = () => {
           </Link>
         </ul>
       </nav>
-      {user ? (
+      {!loading && user ? (
         <button
-          onClick={signOutUser}
+          onClick={() => signOutUser()}
           className="text-white hover:bg-slate-500 py-2 px-2 rounded-lg text-sm"
         >
           Logout
         </button>
       ) : (
-        <Link
+        <a
           href="/auth/login"
           className="text-white hover:bg-slate-500 py-2 px-2 rounded-lg text-sm"
         >
           Login
-        </Link>
+        </a>
       )}
 
       <div onClick={handleMobile}>

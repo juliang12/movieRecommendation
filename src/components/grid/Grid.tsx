@@ -1,26 +1,19 @@
-"use client";
+"use server";
 import React from "react";
-import { useSelector } from "react-redux";
+import { MovieDetails } from "@/models/Movie";
 import Card from "../card/Card";
-import { RootState } from "@/store/store";
-import useGetSearchData from "@/hooks/useSearch";
-import Loader from "../loader/Loader";
 
-const Grid = () => {
-  const state = useSelector((state: RootState) => state.movies);
-  const { loading } = useGetSearchData();
+interface GridProps {
+  movies: MovieDetails[] | any;
+}
+const Grid = async ({ movies }: GridProps) => {
 
-  if (loading)
-    return (
-      <div className="flex justify-center">
-        <Loader />
-      </div>
-    );
-    
   return (
     <div className="w-full h-full flex flex-wrap gap-5 justify-center">
-      {state?.length > 0 ? (
-        state?.map((movie: any) => <Card key={movie.id} movie={movie} />)
+      {movies.length ? (
+        movies?.map((movie: MovieDetails) => (
+          <Card key={movie.id} movie={movie} />
+        ))
       ) : (
         <div className="pt-20 h-screen">
           <h1 className="text-white text-3xl text-center">No results</h1>
